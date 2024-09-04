@@ -80,4 +80,4 @@ def parse(image_path):
     return expression_string
 
 
-# print(parse("test_images/equation.png"))
+print(parse("test_images/img.png"))
