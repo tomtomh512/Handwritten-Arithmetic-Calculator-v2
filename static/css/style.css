@@ -1,3 +1,87 @@
 body {
-    background-color: darkslategray;
+    background-color: #16314f;
+    font-family: "Karla", sans-serif;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+}
+
+h1 {
+    font-size: 40pt;
+    text-align: center;
+}
+
+.input {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+}
+
+#drawPlace, #answer {
+    background-color: white;
+}
+
+#drawPlace {
+    border-radius: 10px 0 0 10px;
+}
+
+#answer {
+    color: black;
+    border-left: black 2px dotted;
+    width: 450px;
+    height: 250px;
+    border-radius: 0 10px 10px 0;
+    font-family: "Caveat", cursive;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 120pt;
+    text-align: center;
+}
+
+.tools-container {
+    display: inline-block;
+    margin-top: 25px;
+    width: calc(750px + 450px);
+}
+
+.tools {
+    display: flex;
+}
+
+.tools > section {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+}
+
+.buttons {
+    flex: 750;
+}
+
+.verify-text-container {
+    flex: 450;
+}
+
+.tools > section > div {
+    background-color: white;
+    color: black;
+    margin: auto 10px;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 20pt;
+}
+
+.button {
+    font-weight: bold;
+    transition: 0.25s;
+}
+
+.button:hover {
+    background-color: grey;
+}
+
+.verify-text {
+    width: 90%;
 }

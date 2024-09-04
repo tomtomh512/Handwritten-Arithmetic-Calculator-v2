@@ -79,9 +79,12 @@ def parse(image_path):
 
     # check if last character is an equal sign
     last_character_idx = len(vertical_bounds) - 1
-    if find_character(image, bottom, top, vertical_bounds[last_character_idx][0], vertical_bounds[last_character_idx][1]) != '=':
+    left = vertical_bounds[last_character_idx][0]
+    right = vertical_bounds[last_character_idx][1]
+    if find_character(image, bottom, top, left, right) != '=':
         return
 
+    # if there is an equal sign, continue
     expression_string = ""
     for (left, right) in vertical_bounds:
         expression_string += find_character(image, bottom, top, left, right)
@@ -89,4 +92,5 @@ def parse(image_path):
     return expression_string
 
 
-print(parse("test_images/img_1.png"))
+print(parse("test_images/img.png") is None)
+print(parse("test_images/img_1.png") is None)
