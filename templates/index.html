@@ -12,19 +12,12 @@
 <body>
     <h1> Handwritten Arithmetic Calculator </h1>
 
-    <section class="input">
-        <canvas id="drawPlace" height="250" width="750"></canvas>
-        <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-        <div id="answer"></div>
-    </section>
-
     <main class="tools-container">
         <section class="tools">
             <section class="buttons">
                 <div class="draw button" onclick="draw()"> Draw </div>
                 <div class="erase button" onclick="erase()"> Erase </div>
                 <div class="clear button" onclick="clearCanvas()"> Clear </div>
-
             </section>
 
             <section class="verify-text-container">
@@ -32,5 +25,12 @@
             </section>
         </section>
     </main>
+
+    <canvas id="drawPlace" height="250" width="1250"></canvas>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <section class="answer-container">
+        <div id="answer"> Answerrr</div>
+    </section>
+
 </body>
 </html>

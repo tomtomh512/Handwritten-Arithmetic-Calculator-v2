@@ -137,11 +137,18 @@ function generateImage() {
 
 function solve(expressionString, x, y1, y2) {
     if (expressionString == null) {
-        document.getElementById("answer").innerHTML = "";
+        // document.getElementById("answer").innerHTML = "";
         document.getElementById("verify-text").innerHTML = "Draw an equal sign to solve";
+
     } else {
-        const removeEqualSign = expressionString.slice(0, -1);
+        let fontSize = y1 - y2;
+        let removeEqualSign = expressionString.slice(0, -1);
         let solution = eval(removeEqualSign);
+
+        console.log(solution);
+        console.log(x);
+        console.log(y1);
+        console.log(fontSize);
 
         let build = '';
         let operations = {'+': ' + ', '/': ' ÷ ', '*': ' × ', '-': ' - ', '=': ' = '}
@@ -154,7 +161,7 @@ function solve(expressionString, x, y1, y2) {
             }
         }
 
-        document.getElementById("answer").innerHTML = solution;
+        // document.getElementById("answer").innerHTML = solution;
         document.getElementById("verify-text").innerHTML = build + solution;
         // console.log("Answer needs to be placed at " + x + ", " + y1 + " with a height of " + (y2 - y1) + "px")
         // ctx.font = (y2 - y1 + 25) + "px Caveat";
