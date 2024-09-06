@@ -39,6 +39,7 @@ h1 {
     font-style: normal;
     font-size: 120pt;
     text-align: center;
+    overflow: hidden;
 }
 
 .tools-container {

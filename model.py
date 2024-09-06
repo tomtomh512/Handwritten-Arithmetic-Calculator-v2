@@ -46,7 +46,7 @@ class ConvolutionalNetwork(nn.Module):
 
 
 model = ConvolutionalNetwork()
-model.load_state_dict(torch.load('math_model_2.pt'))
+model.load_state_dict(torch.load('math_model_5.pt'))
 model.eval()
 
 

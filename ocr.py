@@ -7,18 +7,17 @@ from PIL import Image
 
 def find_character(image, bottom, top, left, right):
     # crop out the character image
-    char_image = image[bottom:top, left:right]
+    side_grab = 10  # grabs extra space from sides of character
+    char_image = image[bottom-side_grab:top+side_grab, left-side_grab:right+side_grab]
 
     # calculate padding to square image
     height, width = char_image.shape
 
     if height > width:
-        top_padding = 0
-        bottom_padding = 0
+        top_padding = bottom_padding = 0
         left_padding = right_padding = (height - width) // 2
     else:
-        left_padding = 0
-        right_padding = 0
+        left_padding = right_padding = 0
         top_padding = bottom_padding = (width - height) // 2
 
     squared_image = cv2.copyMakeBorder(char_image, top_padding, bottom_padding, left_padding, right_padding,
@@ -30,7 +29,12 @@ def find_character(image, bottom, top, left, right):
 
 def parse(image_path):
     image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+
+    # add padding to accommodate side_grab in find_character
+    image = cv2.copyMakeBorder(image, 20, 20, 20, 20, cv2.BORDER_CONSTANT, value=255)
+    # binary image
     threshold, binary_image = cv2.threshold(image, 128, 255, cv2.THRESH_BINARY_INV)
+    # thinning
     thinned_image = skeletonize(binary_image / 255)
 
     vertical_projection = np.sum(thinned_image, axis=0)
@@ -74,6 +78,7 @@ def parse(image_path):
     if in_character:
         horizontal_bounds.append((start, len(horizontal_projection)))
 
+    # these are inverted
     bottom = horizontal_bounds[0][0]
     top = horizontal_bounds[0][1]
 
@@ -89,8 +94,4 @@ def parse(image_path):
     for (left, right) in vertical_bounds:
         expression_string += find_character(image, bottom, top, left, right)
 
-    return expression_string
-
-
-print(parse("test_images/img.png") is None)
-print(parse("test_images/img_1.png") is None)
+    return {"expressionString": expression_string, "x": vertical_bounds[last_character_idx][1], "y1": bottom, "y2": top}

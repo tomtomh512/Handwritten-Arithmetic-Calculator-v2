@@ -100,6 +100,12 @@ function clearCanvas() {
     // Set background to white
     ctx.fillStyle = "#ffffff";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // reset to initial settings
+    document.getElementById("answer").innerHTML = "";
+    document.getElementById("verify-text").innerHTML = "Draw an equal sign to solve";
+    colorLine = "black";
+    ctx.lineWidth = 5;
 }
 
 function generateImage() {
@@ -121,18 +127,38 @@ function generateImage() {
             })
                 .then(response => response.json())
                 .then(data => {
-                    if (data.output == null) {
-                        console.log("y");
-                        document.getElementById("answer").innerHTML = "";
-                        document.getElementById("verify-text").innerHTML = "Draw an equal sign to solve";
-                    } else {
-                        console.log("x");
-                        const removeEqualSign = data.output.slice(0, -1);
-                        let solution = eval(removeEqualSign);
-                        document.getElementById("answer").innerHTML = solution;
-                        document.getElementById("verify-text").innerHTML = data.output + solution;
+                    if (data.expressionString) {
+                        solve(data.expressionString, data.x, data.y1, data.y2);
                     }
                 });
         }
     });
+}
+
+function solve(expressionString, x, y1, y2) {
+    if (expressionString == null) {
+        document.getElementById("answer").innerHTML = "";
+        document.getElementById("verify-text").innerHTML = "Draw an equal sign to solve";
+    } else {
+        const removeEqualSign = expressionString.slice(0, -1);
+        let solution = eval(removeEqualSign);
+
+        let build = '';
+        let operations = {'+': ' + ', '/': ' ÷ ', '*': ' × ', '-': ' - ', '=': ' = '}
+
+        for (let char of expressionString) {
+            if (operations[char] !== undefined) {
+                build += operations[char];
+            } else {
+                build += char;
+            }
+        }
+
+        document.getElementById("answer").innerHTML = solution;
+        document.getElementById("verify-text").innerHTML = build + solution;
+        // console.log("Answer needs to be placed at " + x + ", " + y1 + " with a height of " + (y2 - y1) + "px")
+        // ctx.font = (y2 - y1 + 25) + "px Caveat";
+        // ctx.fillStyle = "black";
+        // ctx.fillText(solution, x, (y2 + y1) / 2);
+    }
 }
