@@ -7,6 +7,7 @@ body {
     justify-content: center; /* Center horizontally */
     align-items: center;     /* Center vertically */
     overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 h1 {
@@ -81,16 +82,14 @@ canvas {
 }
 
 #answer {
+    display: inline-block;
     position: relative;
-    top: 0px;
-    left: 0px;
-    color: red;
-    z-index: 0;
     text-align: left;
+    width: 1px;
+    color: black;
     font-weight: bold;
     user-select: none;
     -webkit-user-select: none; /* Safari */
     -moz-user-select: none;    /* Firefox */
     -ms-user-select: none;     /* IE 10 and Edge */
-    font-size: 20px;
 }

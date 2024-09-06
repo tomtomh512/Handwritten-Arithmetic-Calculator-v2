@@ -102,8 +102,11 @@ function clearCanvas() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // reset to initial settings
-    document.getElementById("answer").innerHTML = "";
     document.getElementById("verify-text").innerHTML = "Draw an equal sign to solve";
+    document.getElementById("answer").innerHTML = "";
+    document.getElementById("answer").style.left = "0px";
+    document.getElementById("answer").style.bottom = "0px";
+    document.getElementById("answer").style.fontSize = "0px";
     colorLine = "black";
     ctx.lineWidth = 5;
 }
@@ -127,6 +130,7 @@ function generateImage() {
             })
                 .then(response => response.json())
                 .then(data => {
+                    console.log(data);
                     solve(data.expressionString, data.x, data.y1, data.y2);
                 });
         }
@@ -137,7 +141,6 @@ function solve(expressionString, x, y1, y2) {
 
     let fontSize = y2 - y1;
     let removeEqualSign = expressionString.slice(0, -1);
-    let solution = eval(removeEqualSign);
 
     let build = '';
     let operations = {'+': ' + ', '/': ' ÷ ', '*': ' × ', '-': ' - ', '=': ' = '}
@@ -151,5 +154,32 @@ function solve(expressionString, x, y1, y2) {
     }
 
     let lastChar = expressionString[expressionString.length - 1];
-    document.getElementById("verify-text").innerHTML = (lastChar == '=') ? (build + solution) : build;
+    let verifyBox = document.getElementById("verify-text");
+    let answerBox = document.getElementById("answer");
+    if (lastChar == '=') {
+        let solution = eval(removeEqualSign);
+        verifyBox.innerHTML = build + solution;
+        answerBox.innerHTML = solution;
+
+        // find balance
+        // answerBox.style.left = "0px";
+        let canvasWidth = 1250;
+        let answerOffSet = Math.abs(canvasWidth / 2 - x);
+
+        if (x >= canvasWidth / 2) {
+            answerBox.style.left = answerOffSet + "px";
+        } else {
+            answerBox.style.left = -answerOffSet + "px";
+        }
+        answerBox.style.bottom = (250 - y1 + 45) + "px";
+        answerBox.style.fontSize = (fontSize + 15) + "px";
+
+    } else {
+        verifyBox.innerHTML = build;
+        answerBox.innerHTML = "";
+        answerBox.style.left = "0px";
+        answerBox.style.bottom = "0px";
+        answerBox.style.fontSize = "0px";
+
+    }
 }
