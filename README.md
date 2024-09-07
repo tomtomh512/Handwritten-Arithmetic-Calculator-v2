@@ -28,4 +28,4 @@ A calculator that automatically solves a handwritten arithmetic expression
 <h2>Note</h2>
   <li> No mobile view support </li>
   <li> Answer will not appear next to equal sign if window is less than canvas width </li>
-  <li> For demonstration purposes, this current version uses eval(), which is unsecure and may output inaccuracies </li>
+  <li> For demonstration purposes, this current version uses eval(), which may output inaccuracies </li>

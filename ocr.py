@@ -27,6 +27,29 @@ def find_character(image, bottom, top, left, right):
     return process_image(pil_image)
 
 
+def get_bounds(projection):
+    bounds = []
+    in_character = False
+    start = 0
+
+    for i, value in enumerate(projection):
+        # when encountering character, log start and set in_character to true
+        if value > 0 and not in_character:
+            start = i
+            in_character = True
+
+        # when leaving character, log end and set in_character to false
+        elif value <= 0 and in_character:
+            bounds.append((start, i))
+            in_character = False
+
+    # if the character continues until the end
+    if in_character:
+        bounds.append((start, len(projection)))
+
+    return bounds
+
+
 def parse(image_path):
     image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
 
@@ -37,46 +60,13 @@ def parse(image_path):
     # thinning
     thinned_image = skeletonize(binary_image / 255)
 
+    # Projections
     vertical_projection = np.sum(thinned_image, axis=0)
     horizontal_projection = np.sum(thinned_image, axis=1)
 
-    vertical_bounds = []
-    in_character = False
-    start = 0
-
-    for i, value in enumerate(vertical_projection):
-        # when encountering character, log start and set in_character to true
-        if value > 0 and not in_character:
-            start = i
-            in_character = True
-
-        # when leaving character, log end and set in_character to false
-        elif value <= 0 and in_character:
-            vertical_bounds.append((start, i))
-            in_character = False
-
-    # if the character continues until the end
-    if in_character:
-        vertical_bounds.append((start, len(vertical_projection)))
-
-    horizontal_bounds = []
-    in_character = False
-    start = 0
-
-    for i, value in enumerate(horizontal_projection):
-        # when encountering character, log start and set in_character to true
-        if value > 0 and not in_character:
-            start = i
-            in_character = True
-
-        # when leaving character, log end and set in_character to false
-        elif value <= 0 and in_character:
-            horizontal_bounds.append((start, i))
-            in_character = False
-
-    # if the character continues until the end
-    if in_character:
-        horizontal_bounds.append((start, len(horizontal_projection)))
+    # Bounds
+    vertical_bounds = get_bounds(vertical_projection)
+    horizontal_bounds = get_bounds(horizontal_projection)
 
     # these are inverted
     bottom = horizontal_bounds[0][0]
@@ -85,13 +75,6 @@ def parse(image_path):
     for bound in horizontal_bounds:
         bottom = min(bottom, bound[0])
         top = max(top, bound[1])
-
-    # check if last character is an equal sign
-    # last_character_idx = len(vertical_bounds) - 1
-    # left = vertical_bounds[last_character_idx][0]
-    # right = vertical_bounds[last_character_idx][1]
-    # if find_character(image, bottom, top, left, right) != '=':
-    #     return
 
     # if there is an equal sign, continue
     expression_string = ""

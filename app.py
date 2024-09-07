@@ -34,14 +34,11 @@ def upload():
     # Remove
     os.remove(image_path)
 
-    if result:
-        return jsonify({"expressionString": result["expressionString"],
-                        "x": result["x"],
-                        "y1": result["y1"],
-                        "y2": result["y2"]
-                        }), 200
-    else:
-        return jsonify({}), 200
+    return jsonify({"expressionString": result["expressionString"],
+                    "x": result["x"],
+                    "y1": result["y1"],
+                    "y2": result["y2"]
+                    }), 200
 
 
 if __name__ == '__main__':
