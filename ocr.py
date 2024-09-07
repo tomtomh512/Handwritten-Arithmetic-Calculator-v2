@@ -82,6 +82,10 @@ def parse(image_path):
     bottom = horizontal_bounds[0][0]
     top = horizontal_bounds[0][1]
 
+    for bound in horizontal_bounds:
+        bottom = min(bottom, bound[0])
+        top = max(top, bound[1])
+
     # check if last character is an equal sign
     # last_character_idx = len(vertical_bounds) - 1
     # left = vertical_bounds[last_character_idx][0]

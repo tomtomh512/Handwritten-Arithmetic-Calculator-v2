@@ -1,59 +1,71 @@
 body {
-    background-color: #16314f;
+    /*background-color: #16314f;*/
+    background-image: url("../images/grid.png");
     font-family: "Karla", sans-serif;
     color: white;
-    padding: 20px;
     text-align: center;
+    padding: 20px;
     justify-content: center; /* Center horizontally */
     align-items: center;     /* Center vertically */
     overflow-x: hidden;
     overflow-y: hidden;
 }
 
+.header-container {
+    display: inline-block;
+    width: 1250px;
+}
+
+.header-container > h3 {
+    text-align: right;
+    margin: 0 10px 10px 0;
+}
+
+a {
+    color: white;
+}
+
 h1 {
     font-size: 40pt;
     text-align: center;
+    margin: 0 auto 30px auto;
 }
 
 .tools-container {
     display: inline-block;
-    margin-bottom: 25px;
+    margin-bottom: 10px;
     width: 1250px;
 }
 
-.tools {
-    display: flex;
-}
-
-.tools > section {
+.tools, .tools > section {
     display: flex;
 }
 
 .tools > section > div {
-    margin: auto 10px;
-    border-radius: 10px;
-    padding: 10px;
     font-size: 20pt;
+    border-radius: 10px;
+    margin: auto 10px;
+    padding: 10px;
 }
 
 .buttons {
     flex: 1;
-    justify-content: left;
     margin-left: 10px;
+    justify-content: left;
 }
 
 .verify-text-container {
     flex: 2;
-    justify-content: right;
     margin-right: 10px;
+    justify-content: right;
 }
 
 .button {
-    font-weight: bold;
-    transition: 0.25s;
     border: white 3px solid;
     background-color: black;
     color: white;
+    font-weight: bold;
+    transition: 0.25s;
 }
 
 .button:hover {
@@ -69,13 +81,37 @@ h1 {
     color: black;
 }
 
+.instructions-container {
+    display: inline-block;
+    width: 1250px;
+}
+
+.instructions {
+    display: flex;
+}
+
+.instructions > div {
+    flex: 1;
+    font-size: 16pt;
+}
+
+.left-instructions {
+    text-align: left;
+    margin-left: 20px;
+}
+
+.right-instructions {
+    text-align: right;
+    margin-right: 20px;
+}
+
 canvas {
+    margin-top: 15px;
     border-radius: 10px;
 }
 
 .answer-container {
     width: 1250px;
-    border: 2px red solid;
     display: inline-block;
     position: relative;
     bottom: 270px;

@@ -102,7 +102,7 @@ function clearCanvas() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // reset to initial settings
-    document.getElementById("verify-text").innerHTML = "Draw an equal sign to solve";
+    document.getElementById("verify-text").innerHTML = "Check equation here";
     document.getElementById("answer").innerHTML = "";
     document.getElementById("answer").style.left = "0px";
     document.getElementById("answer").style.bottom = "0px";
@@ -138,10 +138,6 @@ function generateImage() {
 }
 
 function solve(expressionString, x, y1, y2) {
-
-    let fontSize = y2 - y1;
-    let removeEqualSign = expressionString.slice(0, -1);
-
     let build = '';
     let operations = {'+': ' + ', '/': ' ÷ ', '*': ' × ', '-': ' - ', '=': ' = '}
 
@@ -156,23 +152,24 @@ function solve(expressionString, x, y1, y2) {
     let lastChar = expressionString[expressionString.length - 1];
     let verifyBox = document.getElementById("verify-text");
     let answerBox = document.getElementById("answer");
+
     if (lastChar == '=') {
-        let solution = eval(removeEqualSign);
+        let expressionToSolve = expressionString.slice(0, -1);
+        let solution = eval(expressionToSolve);
         verifyBox.innerHTML = build + solution;
         answerBox.innerHTML = solution;
 
         // find balance
-        // answerBox.style.left = "0px";
         let canvasWidth = 1250;
-        let answerOffSet = Math.abs(canvasWidth / 2 - x);
+        let canvasHeight = 500;
+        let answerHorizontalOffSet = Math.abs(canvasWidth / 2 - x);
+        let answerVerticalOffset = -50;
+        let fontSize = y2 - y1;
+        let fontSizeOffset = 15;
 
-        if (x >= canvasWidth / 2) {
-            answerBox.style.left = answerOffSet + "px";
-        } else {
-            answerBox.style.left = -answerOffSet + "px";
-        }
-        answerBox.style.bottom = (250 - y1 + 45) + "px";
-        answerBox.style.fontSize = (fontSize + 15) + "px";
+        answerBox.style.left = (x >= canvasWidth / 2) ? answerHorizontalOffSet + "px" : -answerHorizontalOffSet + "px";
+        answerBox.style.bottom = (canvasHeight - y1 + answerVerticalOffset) + "px";
+        answerBox.style.fontSize = (fontSize + fontSizeOffset) + "px";
 
     } else {
         verifyBox.innerHTML = build;
@@ -180,6 +177,5 @@ function solve(expressionString, x, y1, y2) {
         answerBox.style.left = "0px";
         answerBox.style.bottom = "0px";
         answerBox.style.fontSize = "0px";
-
     }
 }

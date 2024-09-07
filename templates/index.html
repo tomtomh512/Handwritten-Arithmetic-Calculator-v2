@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+    <main class="header-container">
+        <h3> Thomas Hsu | <a href="https://github.com/tomtomh512/Handwritten-Arithmetic-Calculator-v2" target="_blank"> Github </a></h3>
+    </main>
+
     <h1> Handwritten Arithmetic Calculator </h1>
 
     <main class="tools-container">
@@ -21,16 +25,23 @@
             </section>
 
             <section class="verify-text-container">
-                <div id="verify-text"> Draw an equal sign to solve </div>
+                <div id="verify-text"> Check equation here </div>
             </section>
         </section>
     </main>
 
-    <canvas id="drawPlace" height="250" width="1250"></canvas>
+    <main class="instructions-container">
+        <section class="instructions">
+            <div class="left-instructions"> Use: 0 - 9, +, -, ×, ÷, and decimal point </div>
+            <div class="right-instructions"> Draw an equal sign to solve </div>
+        </section>
+    </main>
+
+    <canvas id="drawPlace" height="400" width="1250"></canvas>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
     <br>
-    <div id="answer">answer</div>
+    <div id="answer"></div>
 
 </body>
 </html>
