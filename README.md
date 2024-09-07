@@ -1,12 +1,14 @@
 <h1> Handwritten Arithmetic Calculator </h1>
 A calculator that automatically solves a handwritten arithmetic expression
+
+<h2>Technologies Used</h2>
 <ul>
   <li> Convolutional Neural Network created with PyTorch </li>
   <li> OCR segmentation done with CV2 </li>
   <li> Dataset provided by <a href="https://www.kaggle.com/datasets/sagyamthapa/handwritten-math-symbols">Handwritten Math Symbols - Sagyam Thapa</a> </li>
 </ul>
 
-<img src="demo.gif">
+<img src="demo_1.gif">
 
 <h2>Features</h2>
 <ul>
