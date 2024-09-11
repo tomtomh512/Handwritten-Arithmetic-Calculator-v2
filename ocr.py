@@ -6,11 +6,11 @@ from PIL import Image
 
 
 def find_character(image, bottom, top, left, right):
-    # crop out the character image
+    # Crop out the character image
     side_grab = 10  # grabs extra space from sides of character
     char_image = image[bottom-side_grab:top+side_grab, left-side_grab:right+side_grab]
 
-    # calculate padding to square image
+    # Calculate padding to square image
     height, width = char_image.shape
 
     if height > width:
@@ -33,17 +33,17 @@ def get_bounds(projection):
     start = 0
 
     for i, value in enumerate(projection):
-        # when encountering character, log start and set in_character to true
+        # When encountering character, log start and set in_character to true
         if value > 0 and not in_character:
             start = i
             in_character = True
 
-        # when leaving character, log end and set in_character to false
+        # When leaving character, log end and set in_character to false
         elif value <= 0 and in_character:
             bounds.append((start, i))
             in_character = False
 
-    # if the character continues until the end
+    # If the character continues until the end
     if in_character:
         bounds.append((start, len(projection)))
 
@@ -53,11 +53,11 @@ def get_bounds(projection):
 def parse(image_path):
     image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
 
-    # add padding to accommodate side_grab in find_character
+    # Add padding to accommodate side_grab in find_character
     image = cv2.copyMakeBorder(image, 20, 20, 20, 20, cv2.BORDER_CONSTANT, value=255)
-    # binary image
+    # Binary image
     threshold, binary_image = cv2.threshold(image, 128, 255, cv2.THRESH_BINARY_INV)
-    # thinning
+    # Thinning
     thinned_image = skeletonize(binary_image / 255)
 
     # Projections
@@ -68,7 +68,7 @@ def parse(image_path):
     vertical_bounds = get_bounds(vertical_projection)
     horizontal_bounds = get_bounds(horizontal_projection)
 
-    # these are inverted
+    # These are inverted
     bottom = horizontal_bounds[0][0]
     top = horizontal_bounds[0][1]
 
@@ -76,7 +76,7 @@ def parse(image_path):
         bottom = min(bottom, bound[0])
         top = max(top, bound[1])
 
-    # if there is an equal sign, continue
+    # If there is an equal sign, continue
     expression_string = ""
     for (left, right) in vertical_bounds:
         expression_string += find_character(image, bottom, top, left, right)

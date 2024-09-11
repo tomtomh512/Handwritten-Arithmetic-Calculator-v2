@@ -160,10 +160,10 @@ function solve(expressionString, x, y1, y2) {
         answerBox.innerHTML = solution;
 
         // find balance
-        let canvasWidth = 1250;
-        let canvasHeight = 500;
+        let canvasWidth = canvas.width;
+        let canvasHeight = canvas.height;
         let answerHorizontalOffSet = Math.abs(canvasWidth / 2 - x);
-        let answerVerticalOffset = -50;
+        let answerVerticalOffset = 45;
         let fontSize = y2 - y1;
         let fontSizeOffset = 15;
 
