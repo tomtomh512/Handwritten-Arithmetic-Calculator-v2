@@ -20,9 +20,8 @@ A calculator that automatically solves a handwritten arithmetic expression
 
 <h2>Future Implementation Goals</h2>
 <ul>
-  <li> Ability to handle multiple expressions (Current version can only handle one equation) </li>
+  <li> Ability to handle multiple lines of input </li>
   <li> Needs error handling </li>
-
 </ul>
 
 <h2>Note</h2>

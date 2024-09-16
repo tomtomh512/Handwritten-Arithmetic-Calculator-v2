@@ -35,8 +35,8 @@ function startDrawing(event) {
         y = touch.pageY - canvas.offsetTop;
     }
 
-    // if there exists a current timeout session, clear it
-    // stopDrawing will create new session for current stroke
+    // If there exists a current timeout session, clear it
+    // StopDrawing will create new session for current stroke
     clearTimeout(timeoutID);
 }
 
@@ -101,12 +101,12 @@ function clearCanvas() {
     ctx.fillStyle = "#ffffff";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // reset to initial settings
+    // Reset to initial settings
     document.getElementById("verify-text").innerHTML = "Check equation here";
     document.getElementById("answer").innerHTML = "";
-    document.getElementById("answer").style.left = "0px";
-    document.getElementById("answer").style.bottom = "0px";
-    document.getElementById("answer").style.fontSize = "0px";
+    document.getElementById("answer").style.left = "0";
+    document.getElementById("answer").style.bottom = "0";
+    document.getElementById("answer").style.fontSize = "0";
     colorLine = "black";
     ctx.lineWidth = 5;
 }
@@ -159,23 +159,25 @@ function solve(expressionString, x, y1, y2) {
         verifyBox.innerHTML = build + solution;
         answerBox.innerHTML = solution;
 
-        // find balance
+        // Find balance - varies between fonts
         let canvasWidth = canvas.width;
         let canvasHeight = canvas.height;
         let answerHorizontalOffSet = Math.abs(canvasWidth / 2 - x);
-        let answerVerticalOffset = 45;
+        let answerVerticalOffset = 20;
         let fontSize = y2 - y1;
         let fontSizeOffset = 15;
 
         answerBox.style.left = (x >= canvasWidth / 2) ? answerHorizontalOffSet + "px" : -answerHorizontalOffSet + "px";
         answerBox.style.bottom = (canvasHeight - y1 + answerVerticalOffset) + "px";
         answerBox.style.fontSize = (fontSize + fontSizeOffset) + "px";
+        answerBox.style.lineHeight = fontSize + "px";
 
     } else {
+        // Reset to initial settings
         verifyBox.innerHTML = build;
         answerBox.innerHTML = "";
-        answerBox.style.left = "0px";
-        answerBox.style.bottom = "0px";
-        answerBox.style.fontSize = "0px";
+        answerBox.style.left = "0";
+        answerBox.style.bottom = "0";
+        answerBox.style.fontSize = "0";
     }
 }
