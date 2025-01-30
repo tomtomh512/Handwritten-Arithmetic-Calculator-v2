@@ -21,7 +21,7 @@ A calculator that automatically solves a handwritten arithmetic expression
 <h2>How to run</h2>
 <pre><code>flask run</code></pre>
 <ul>
-  <li> Navigate to http://localhost:5000 to access the applications </li>
+  <li> Navigate to http://localhost:5000 </li>
 </ul>
 
 <h2>Future Implementation Goals</h2>
