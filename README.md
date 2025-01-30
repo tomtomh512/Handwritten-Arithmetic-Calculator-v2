@@ -18,6 +18,12 @@ A calculator that automatically solves a handwritten arithmetic expression
   <li> Changes to the expression are reflected in real time </li>
 </ul>
 
+<h2>How to run</h2>
+<pre><code>flask run</code></pre>
+<ul>
+  <li> Navigate to http://localhost:5000 to access the applications </li>
+</ul>
+
 <h2>Future Implementation Goals</h2>
 <ul>
   <li> Ability to handle multiple lines of input </li>
