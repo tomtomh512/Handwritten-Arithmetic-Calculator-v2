@@ -34,6 +34,9 @@ def upload():
     # Remove
     os.remove(image_path)
 
+    # x = space from left of canvas to right bound of expression
+    # y1 = space from top of canvas to top bound of expression
+    # y2 = space from top of canvas to bottom bound of expression
     return jsonify({"expressionString": result["expressionString"],
                     "x": result["x"],
                     "y1": result["y1"],
