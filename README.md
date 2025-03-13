@@ -19,18 +19,17 @@ A calculator that automatically solves a handwritten arithmetic expression
 </ul>
 
 <h2>How to run</h2>
-<pre><code>flask run</code></pre>
 <ul>
-  <li> Navigate to http://localhost:5000 </li>
+  <li> Run the Flask application using: <pre><code>flask run</code></pre> </li>
+  <li> Navigate to http://localhost:5000 in your browser </li>
 </ul>
 
 <h2>Future Implementation Goals</h2>
 <ul>
   <li> Ability to handle multiple lines of input </li>
-  <li> Needs error handling </li>
 </ul>
 
 <h2>Note</h2>
-  <li> No mobile view support </li>
-  <li> Answer will not appear next to equal sign if window is less than canvas width </li>
-  <li> For demonstration purposes, this current version uses eval(), which may output inaccuracies </li>
+  <li> The current version does not support mobile view </li>
+  <li> The answer will not appear next to the equal sign if the window width is smaller than the canvas </li>
+  <li> For demonstration purposes, eval() is used to compute the solution, which may result in inaccuracies </li>
