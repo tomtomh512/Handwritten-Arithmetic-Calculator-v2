@@ -18,18 +18,8 @@ A calculator that automatically solves a handwritten arithmetic expression
   <li> Changes to the expression are reflected in real time </li>
 </ul>
 
-<h2>How to run</h2>
+<h2>Local Development</h2>
 <ul>
   <li> Run the Flask application using: <pre><code>flask run</code></pre> </li>
   <li> Navigate to http://localhost:5000 in your browser </li>
 </ul>
-
-<h2>Future Implementation Goals</h2>
-<ul>
-  <li> Ability to handle multiple lines of input </li>
-</ul>
-
-<h2>Note</h2>
-  <li> The current version does not support mobile view </li>
-  <li> The answer will not appear next to the equal sign if the window width is smaller than the canvas </li>
-  <li> For demonstration purposes, eval() is used to compute the solution, which may result in inaccuracies </li>
